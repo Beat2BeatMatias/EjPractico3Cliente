@@ -15,6 +15,7 @@
 
 <body>
 
+    <h1>Lista cercanas</h1>
 
     <table class="table table-striped table-dark">
         <thead>

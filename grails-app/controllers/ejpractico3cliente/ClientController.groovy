@@ -42,7 +42,7 @@ class ClientController {
     }
     def saveAgency(){
         Object jsonAgency=session.data
-        if(validacionService.comprobarDuplicacion(jsonAgency)) {
+        if(validacionService.comprobarDuplicacion(params.id)) {
             flash.message="Existen datos duplicados en la base de datos"
             redirect action:'index'
         }else{
@@ -54,11 +54,16 @@ class ClientController {
                 }
             }
             flash.message="Lista guardada"
-            redirect action:'index'
+            redirect action: 'showFavorite'
         }
 
     }
+    def showFavorite(){
+        render view:'agenciasFavoritas',model: [listaAgencias:Agency.list()]
+    }
     def deleteAgency(){
-
+        def agency=Agency.get(params.id)
+        agency.delete(flush: true)
+        redirect action: 'showFavorite'
     }
 }

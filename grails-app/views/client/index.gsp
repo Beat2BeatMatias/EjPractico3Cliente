@@ -14,6 +14,9 @@
 
 <body>
     <h2>Completar formulario</h2>
+    <g:form action="showFavorite" class="form-group">
+        <g:submitButton name="Favoritos" class="btn btn-info"/>
+    </g:form>
     <g:if test="${flash.message}">
         <div class="message" role="status">${flash.message}</div>
     </g:if>

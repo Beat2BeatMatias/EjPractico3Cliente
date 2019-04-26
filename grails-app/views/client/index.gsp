@@ -14,6 +14,9 @@
 
 <body>
     <h2>Completar formulario</h2>
+    <g:if test="${flash.message}">
+        <div class="message" role="status">${flash.message}</div>
+    </g:if>
     <g:form action="enviarDatos" style="margin: 0 auto; width:320px">
         <label>Sitio:</label>
         <g:textField name="site" value="MLA" required="" type=""/><br/>

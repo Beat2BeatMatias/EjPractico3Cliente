@@ -19,4 +19,9 @@ class ValidacionService {
         return url
 
     }
+    def comprobarDuplicacion(Object listaJson) {
+        def dbAgency = Agency.list()
+        boolean estado = listaJson.any { it -> dbAgency.any{ dbS -> dbS.id == it.id }}
+        return estado
+    }
 }

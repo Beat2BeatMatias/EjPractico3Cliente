@@ -57,7 +57,7 @@ class ClientController {
                             it.terminal).save(flush: true, failOnError: true)
                 }
             }
-            flash.message="Lista guardada"
+            flash.message="Agencia guardada"
             redirect action: 'showFavorite'
         }
 
@@ -66,12 +66,18 @@ class ClientController {
         render view:'agenciasFavoritas',model: [listaAgencias:Agency.list()]
     }
     def deleteAgency(){
-        def agency=Agency.get(params.id)
-        def address=Address.get(agency.getAddressId())
 
-        agency.delete(flush: true)
-        address.delete(flush:true)
+        if(validacionService.comprobarDuplicacion(params.id)) {
+            def agency=Agency.get(params.id)
+            def address=Address.get(agency.getAddressId())
 
-        redirect action: 'showFavorite'
+            agency.delete(flush: true)
+            address.delete(flush:true)
+            flash.message="La agencia ha sido borrada con éxito"
+            redirect action: 'showFavorite'
+        }else{
+            flash.message="No esta guardada como agencias favoritas"
+            redirect action: 'index'
+        }
     }
 }

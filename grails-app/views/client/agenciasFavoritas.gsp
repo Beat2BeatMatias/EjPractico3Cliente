@@ -15,16 +15,16 @@
 
 <body>
 
-<h1>Lista favorita</h1>
+<h2>Agencias favoritas</h2>
 <g:form action="index">
     <g:submitButton name="volver" class="btn btn-info"/>
 </g:form>
-<table class="table table-striped table-dark">
+<table class="table table-striped">
     <thead>
     <tr>
         <th scope="col">Descripción</th>
-        <th scope="col">Direccion</th>
-        <th scope="col">Codigo de agencia</th>
+        <th scope="col">Dirección</th>
+        <th scope="col">Código de agencia</th>
         <th scope="col">Distancia (mts)</th>
         <th scope="col">Unlike</th>
     </tr>
@@ -43,7 +43,7 @@
             <td><g:formatNumber number="${it.distance}"/></td>
             <td>
                 <g:form action="deleteAgency" id="${it.id}">
-                    <g:submitButton name="unlike" class="btn btn-light"/>
+                    <g:submitButton name="unlike" class="btn btn-primary"/>
                 </g:form>
             </td>
         </tr>

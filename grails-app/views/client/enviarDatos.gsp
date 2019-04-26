@@ -13,16 +13,20 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 
-<body>
+<body style="margin: 30px">
 
-    <h1>Lista cercanas</h1>
+    <h2>Agencias cercanas</h2>
 
-    <table class="table table-striped table-dark">
+    <g:form action="showFavorite" class="form-group" style="margin-top: 20px">
+        <g:submitButton name="Agencias favoritas" class="btn btn-info"/>
+    </g:form>
+
+    <table class="table table-striped">
         <thead>
         <tr>
             <th scope="col">Descripción</th>
-            <th scope="col">Direccion</th>
-            <th scope="col">Codigo de agencia</th>
+            <th scope="col">Dirección</th>
+            <th scope="col">Código de agencia</th>
             <th scope="col">Distancia (mts)</th>
             <th scope="col">Like</th>
             <th scope="col">Unlike</th>
@@ -42,12 +46,12 @@
                     <td><g:formatNumber number="${it.distance}"/></td>
                     <td>
                         <g:form action="saveAgency" id="${it.id}">
-                            <g:submitButton name="like" class="btn btn-light"/>
+                            <g:submitButton name="like" class="btn btn-primary"/>
                         </g:form>
                     </td>
                     <td>
                         <g:form action="deleteAgency" id="${it.id}">
-                            <g:submitButton name="unlike" class="btn btn-light"/>
+                            <g:submitButton name="unlike" class="btn btn-primary"/>
                         </g:form>
                     </td>
                 </tr>

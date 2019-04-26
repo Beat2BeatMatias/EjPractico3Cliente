@@ -48,9 +48,13 @@ class ClientController {
         }else{
             jsonAgency.each { it ->
                 if (it.id == params.id) {
-                    println it.address.address_line.toString()
-                    def address = new Address(it.address.address_line.toString(), it.country.toString(), it.address.country.toString(), it.address.location.toString(), it.address.other_info.toString(), it.address.state.toString(), it.address.zip_code.toString()).save(flush: true, failOnError: true)
-                    new Agency(address, it.agency_code, it.correspondent_id, it.description, it.disabled, it.distance, it.id, it.payment_method_id, it.phone, it.site_id, it.terminal).save(flush: true, failOnError: true)
+                    def address = new Address(it.address.address_line.toString(), it.address.city.toString(),
+                            it.address.country.toString(), it.address.location.toString(),
+                            it.address.other_info.toString(), it.address.state.toString(),
+                            it.address.zip_code.toString()).save(flush: true, failOnError: true)
+                    new Agency(address, it.agency_code, it.correspondent_id, it.description, it.disabled,
+                            it.distance, it.id, it.payment_method_id, it.phone, it.site_id,
+                            it.terminal).save(flush: true, failOnError: true)
                 }
             }
             flash.message="Lista guardada"
@@ -63,7 +67,11 @@ class ClientController {
     }
     def deleteAgency(){
         def agency=Agency.get(params.id)
+        def address=Address.get(agency.getAddressId())
+
         agency.delete(flush: true)
+        address.delete(flush:true)
+
         redirect action: 'showFavorite'
     }
 }

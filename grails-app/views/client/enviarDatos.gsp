@@ -45,7 +45,7 @@
                         </g:form>
                     </td>
                     <td>
-                        <g:form action="saveAgency">
+                        <g:form action="deleteAgency" id="${it.id}">
                             <g:submitButton name="unlike" class="btn btn-light"/>
                         </g:form>
                     </td>

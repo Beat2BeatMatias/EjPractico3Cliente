@@ -58,4 +58,7 @@ class ClientController {
         }
 
     }
+    def deleteAgency(){
+
+    }
 }

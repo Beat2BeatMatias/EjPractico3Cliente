@@ -17,10 +17,15 @@
 
     <h2>Agencias cercanas</h2>
 
-    <g:form action="showFavorite" class="form-group" style="margin-top: 20px">
+    <g:form action="showFavorite" class="form-group" style="margin-top: 20px; float: left">
         <g:submitButton name="Agencias favoritas" class="btn btn-info"/>
     </g:form>
-
+    <g:form action="index">
+        <g:submitButton name="volver" class="btn btn-info" style="margin-top: 20px; margin-left: 20px"/>
+    </g:form>
+    <g:if test="${flash.message}">
+        <div class="message" role="status">${flash.message}</div>
+    </g:if>
     <table class="table table-striped">
         <thead>
         <tr>

@@ -16,27 +16,45 @@ class ClientController {
     }
 
     def enviarDatos(){
+
+        try{
+            validacionService.validacionFormulario(params.latitud, params.longitud, params.limit, params.offset)
+        }catch (ValidacionException e){
+            flash.message=e.getMessage()
+            redirect action:'index'
+            return
+        }
+
         def url= new URL("http://localhost:4567/agencias/sites/" + params.site + "/payment_methods/" + params.payment_methods + "/order/" + params.order + "/agencies?near_to=" + params.latitud + "," + params.longitud + ",300")
         def urlDefinitivo = validacionService.validarParametros(url, params.limit, params.offset)
 
-        def connection = (HttpURLConnection) urlDefinitivo.openConnection()
-        connection.setRequestMethod("GET")
-        connection.setRequestProperty("Accept", "application/json")
-        connection.setRequestProperty("user-Agent", "Mozilla/5.0")
+        def jsonText
+        try {
+            def connection = (HttpURLConnection) urlDefinitivo.openConnection()
+            connection.setRequestMethod("GET")
+            connection.setRequestProperty("Accept", "application/json")
+            connection.setRequestProperty("user-Agent", "Mozilla/5.0")
 
-        BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream(), "UTF-8"))
-        int read = 0
-        StringBuffer buffer = new StringBuffer()
-        char[] chars = new char[1024]
-        while ((read = reader.read(chars)) != -1) {
-            buffer.append(chars, 0, read)
+            BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream(), "UTF-8"))
+            int read = 0
+            StringBuffer buffer = new StringBuffer()
+            char[] chars = new char[1024]
+            while ((read = reader.read(chars)) != -1) {
+                buffer.append(chars, 0, read)
+            }
+            reader.close()
+            JsonSlurper json = new JsonSlurper()
+            jsonText = json.parseText(buffer.toString())
+        }catch(Exception e){
+            flash.message=e.getMessage()
+            redirect action:'index'
+            return
         }
-        reader.close()
+        if(jsonText.data.size()==0){
+            flash.message="No se encontró ninguna agencia"
+        }
 
-        JsonSlurper json = new JsonSlurper()
-        println(buffer.toString())
-        def jsonText = json.parseText(buffer.toString())
-        println jsonText.toString()
+
         session.data=jsonText.data
         [result:jsonText.data]
     }

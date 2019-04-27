@@ -29,6 +29,19 @@ class Agency {
     }
     static constraints = {
 
+        address blank:true, nullable: true
+        agency_code blank:true, nullable: true
+        correspondent_id blank:true, nullable: true
+        description blank:true, nullable: true
+        disabled blank:true, nullable: true
+        distance blank:true, nullable: true
+        id blank:true, nullable: true
+        payment_method_id blank:true, nullable: true
+        phone blank:true, nullable: true
+        site_id blank:true, nullable: true
+        terminal blank:true, nullable: true
+
+
     }
     static mapping = {
         id generator:'assigned'

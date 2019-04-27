@@ -24,4 +24,9 @@ class ValidacionService {
         boolean estado = dbAgency.any {it -> it.id == id}
         return estado
     }
+    def validacionFormulario(String latitud, String longitud, String limit, String offset) throws ValidacionException{
+        if(!(latitud.isNumber() && longitud.isNumber() && limit.isNumber() && offset.isNumber())){
+            throw new ValidacionException("Los campos latitud, longitud, límite y offset debe ser números")
+        }
+    }
 }

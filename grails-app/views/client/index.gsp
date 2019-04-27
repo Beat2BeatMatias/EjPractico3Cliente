@@ -36,11 +36,11 @@
         </div>
         <div class="form-group">
             <label>Latitud:</label>
-            <g:textField class="form-control" name="latitud" value="-31.412971" required=""/>
+            <g:textField type="number" class="form-control" name="latitud" value="-31.412971" required=""/>
         </div>
         <div class="form-group">
             <label>Longitud:</label>
-            <g:textField class="form-control" name="longitud" value="-64.18758" required="" />
+            <g:textField type="number" class="form-control" name="longitud" value="-64.18758" required=""/>
         </div>
         <div class="form-group">
             <label>Límite:</label>

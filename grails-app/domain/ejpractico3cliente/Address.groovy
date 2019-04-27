@@ -19,6 +19,13 @@ class Address {
         this.zip_code = zip_code
     }
     static constraints = {
+        address_line blank:true, nullable: true
+        city blank:true, nullable: true
+        country blank:true, nullable: true
+        location blank:true, nullable: true
+        other_info blank:true, nullable: true
+        state blank:true, nullable: true
+        zip_code blank:true, nullable: true
     }
     static mapping = {
     }

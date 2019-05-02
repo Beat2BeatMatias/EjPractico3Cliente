@@ -99,7 +99,11 @@ environments:
     development:
         dataSource:
             dbCreate: create-drop
-            url: jdbc:h2:mem:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE
+            driverClassName: "org.postgresql.Driver"
+            username: "mfariasfalki"
+            password: "P4nz3rM4175@"
+            url: jdbc:postgresql://localhost:5432/
+            dialect: "org.hibernate.dialect.PostgreSQLDialect"
     test:
         dataSource:
             dbCreate: update
